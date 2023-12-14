@@ -3,11 +3,22 @@
 import pandas as pd
 import re
 
-def urls(text):
-    url = re.findall(r'http[s]?://+', text)
-    return url
+xls_file_path = 'C:\\Users\\10643\\Desktop\\programming\\123\\2023-Python-Advanced\\Week 4\\H1.xls'
+df = pd.read_excel(xls_file_path)
 
-H1 = pd.read_excel('C:\\Users\\10643\\Desktop\\programming\\123\\2023-Python-Advanced\\Week 4\\H1.xls')
-H1['Hyperlinks'] = [urls(H1.iloc[i,3])[0] for i in range(len(H1.index))]
+url_pattern = r'https?://\S+'
 
-H1.to_excel('C:\\Users\\10643\\Desktop\\programming\\123\\2023-Python-Advanced\\Week 4\\New_HW1.xls')
+hyperlink_column = []
+
+for col in df.columns:
+    for cell in df[col]:
+        scell = str(cell)
+        if pd.notna(scell):
+            # Use regex to find URLs in the cell content
+            urls_found = re.findall(url_pattern, scell)
+            hyperlink_column.extend(urls_found)
+
+hyperlink_df = pd.DataFrame({'Hyperlinks': hyperlink_column})
+
+new_xlsx_file_path = 'C:\\Users\\10643\\Desktop\\programming\\123\\2023-Python-Advanced\\Week 4\\New_H1.xls'
+hyperlink_df.to_excel(new_xlsx_file_path, index=False, engine='openpyxl')
