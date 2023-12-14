@@ -10,4 +10,4 @@ def urls(text):
 H1 = pd.read_excel('C:\\Users\\10643\\Desktop\\programming\\123\\2023-Python-Advanced\\Week 4\\H1.xls')
 H1['Hyperlinks'] = [urls(H1.iloc[i,3])[0] for i in range(len(H1.index))]
 
-H1.to_excel('C:\\Users\\10643\\Desktop\\programming\\123\\2023-Python-Advanced\\Week 4\\New_HW1.xlsx')
+H1.to_excel('C:\\Users\\10643\\Desktop\\programming\\123\\2023-Python-Advanced\\Week 4\\New_HW1.xls')
