@@ -5,7 +5,6 @@ from PyPDF4 import PdfFileReader, PdfFileWriter
 
 def merge_first_pages(input_folder):
     output_pdf_path = os.path.join(input_folder, "merged_first_pages.pdf")
-
     pdf_writer = PdfFileWriter()
 
     for root, dirs, files in os.walk(input_folder):
@@ -32,5 +31,4 @@ def merge_first_pages(input_folder):
         print(f'No PDFs found in "{input_folder}"')
 
 input_folder = r"C:\Users\10643\Desktop\programming\2023-Python-Advanced\Week 5\mypdfs"
-
 merge_first_pages(input_folder)
