@@ -1,0 +1,34 @@
+import os
+from PyPDF4 import PdfFileReader, PdfFileWriter
+
+def merge_first_pages(input_folder):
+    output_pdf_path = os.path.join(input_folder, "merged_first_pages.pdf")
+
+    pdf_writer = PdfFileWriter()
+
+    for root, dirs, files in os.walk(input_folder):
+        for file in files:
+            if file.endswith(".pdf"):
+                pdf_path = os.path.join(root, file)
+                if os.path.exists(pdf_path):
+                    # Open the PDF file and extract the first page
+                    pdf_reader = PdfFileReader(pdf_path)
+                    if pdf_reader.numPages > 0:
+                        first_page = pdf_reader.getPage(0)
+                        
+                        # Create a new PDF with the first page
+                        pdf_output = PdfFileWriter()
+                        pdf_output.addPage(first_page)
+                        
+                        # Write the new PDF to the output PDF writer
+                        pdf_writer.addPage(pdf_output.getPage(0))
+
+    if pdf_writer.getNumPages() > 0:
+        with open(output_pdf_path, 'wb') as output_pdf:
+            pdf_writer.write(output_pdf)
+    else:
+        print(f'No PDFs found in "{input_folder}"')
+
+input_folder = r"C:\Users\10643\Desktop\programming\2023-Python-Advanced\Week 5\mypdfs"
+
+merge_first_pages(input_folder)
