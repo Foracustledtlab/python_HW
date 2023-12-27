@@ -31,9 +31,9 @@ def getAbstract(paperUrls):
     return abstract
 
 def translate_api(input_text):
-    # Set your own appid/appkey.
-    appid = '20211212001026102'
-    appkey = 'FE8ZNMHl0uV6mqlApPNQ'
+    # This is my own appid/appkey, pls do not use it without permission
+    appid = '20231227001923227'
+    appkey = 'wXXAHFzVr56psf2TXObR' 
     def make_md5(s, encoding='utf-8'):
         return md5(s.encode(encoding)).hexdigest()
     # For list of language codes, please refer to `https://api.fanyi.baidu.com/doc/21`
@@ -71,4 +71,4 @@ ch_abstracts = []
 
 for ab in abstracts:
     ch_abstracts.append(translate_api(ab))
-write2txt("./myresult2013.txt",name,ch_abstracts)
+write2txt("./my_abstract.txt",name,ch_abstracts)
